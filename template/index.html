@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<!--
+	Multiverse by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>{{title}}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        {% if description %}
+        <meta name="description" content="{{ description }}">
+        {% endif %}
+        <link rel="stylesheet" href="/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="main-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						
+                        <h1>
+                            {% if author %}
+                            <a href="/"><strong>{{author}}</strong></a>
+                            {% else %}
+                            <a href="/"><strong><i class="fa fa-home"></i></strong></a>
+                            {% endif %}
+                            {% if breadcrumbs %}
+                                {% for item in breadcrumbs %}
+                                    {% if item.current %}
+                                    <a href="javascript:;" class="breadcrumbs-current"><strong>/ {{item.title}}</strong></a>
+                                    {% else %}
+                                    <a href="{{item.path}}"><strong>/ {{item.title}}</strong></a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </h1>
+						
+						<nav>
+							<ul>
+								<li><a href="http://idinr.com" class="icon solid fa-info-circle">About Me</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+						{% if children %}
+							{% for item in children %}
+							<article class="thumb">
+								{% if item.category == "album" %}
+									<a href="{{item.path}}" class="link">
+										<img src="{{item.url}}" alt="" />
+									</a>
+								{% else %}
+									<a href="{{item.url}}" class="image">
+										<img src="{{item.url}}" alt="" />
+									</a>
+								{% endif %}
+								{% if item.title %}
+									<h2>
+										{% if item.category == "album" %}
+											<img class="icon-album" src="http://s2.idinr.com/fdf.png"/>
+										{% endif %}
+										{{item.title}}
+									</h2>
+								{% endif %}
+								{% if item.description %}
+									<p>{{item.description}}</p>
+								{% endif %}
+								
+							</article>
+							{% endfor %}
+						{% endif %}
+					</div>
+
+				<!-- Footer -->
+					<!-- <footer id="footer" class="panel">
+						<div class="inner split">
+							<div>
+								<section>
+									<h2>Magna feugiat sed adipiscing</h2>
+									<p>Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum eget quis orci mattis aliquet. Maecenas fringilla et ante at lorem et ipsum. Dolor nulla eu bibendum sapien. Donec non pharetra dui. Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum.</p>
+								</section>
+								<section>
+									<h2>Follow me on ...</h2>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+										<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+										<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+									</ul>
+								</section>
+								<p class="copyright">
+									&copy; Unttled. Design: <a href="http://html5up.net">HTML5 UP</a>.
+								</p>
+							</div>
+							<div>
+								<section>
+									<h2>Get in touch</h2>
+									<form method="post" action="#">
+										<div class="fields">
+											<div class="field half">
+												<input type="text" name="name" id="name" placeholder="Name" />
+											</div>
+											<div class="field half">
+												<input type="text" name="email" id="email" placeholder="Email" />
+											</div>
+											<div class="field">
+												<textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><input type="submit" value="Send" class="primary" /></li>
+											<li><input type="reset" value="Reset" /></li>
+										</ul>
+									</form>
+								</section>
+							</div>
+						</div>
+					</footer> -->
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.poptrox.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>
