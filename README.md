@@ -33,17 +33,17 @@ DEMO: http://i.idinr.com
      "author": "author name",
      "children": [
        {
-         title: "a dog image",
-         description: "description of this image",
-         url: "a image url"
+         "title": "a dog image",
+         "description": "description of this image",
+         "url": "a image url"
        },
        {
-         title: "a image collection,",
-         description: "description of this collection",
-         url: "a thumbnail of this collection",
-         children: [ // a collection must have children field
+         "title": "a image collection,",
+         "description": "description of this collection",
+         "url": "a thumbnail of this collection",
+         "children": [ // a collection must have children field
            {
-             url: "a image url"
+             "url": "a image url"
            }
          ]
        }
@@ -86,5 +86,8 @@ It is a Rust Application.
 
 Defined in ` src/config.rs`
 
+### Template
+The default template is   `template/index.html` and be used by all the pages.
+Template Engine is Tera https://tera.netlify.app/docs/.
 
 
