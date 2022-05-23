@@ -14,7 +14,8 @@ DEMO: http://i.idinr.com
 - Multi-level Albums Support
 - Basic Breadcrumbs
 - Automated Image Fit
-- Easy Config By JSON
+- Easy Config With JSON
+- Faster
 
 
 
