@@ -12,6 +12,10 @@ DEMO: http://i.idinr.com
 ### 2022-6-14
 - Show Image Exif Info
 
+## screenshots
+
+![
+](https://github.com/hangbale/photography-blog/blob/6aa6f2a4b54de39294c583dd14fb455b8b966aae/screenshots/pc.png?raw=true)
 
 ## Features
 
