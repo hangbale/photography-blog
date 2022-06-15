@@ -2059,3 +2059,34 @@ input, select, textarea {
 .breadcrumbs-current > strong {
     color: #a0a0a1 !important;
 }
+.exif-wrapper {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0 0.5em;
+    right: 0;
+}
+
+.exif-item {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.exif-item+.exif-item {
+    margin-left: 0.5em;
+}
+
+.exif-text {
+    margin: 0;
+    margin-left: 0.2em;
+    color: #fff;
+}
+
+.exif-icon {
+    width: 15px;
+    flex-shrink: 0;
+    height: auto;
+}

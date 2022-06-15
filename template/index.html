@@ -14,7 +14,22 @@
         {% endif %}
         <link rel="stylesheet" href="/assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
-
+		<script>
+			var _hmt = _hmt || [];
+			(function () {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?f80be6031ec21350ab69a7b938cf4533";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+        {% if extra %}
+        <script>
+            
+            var __imageExifSuffix = '{{ extra.image_exif_query_suffix }}';
+            var __imageStyleSuffix = '{{ extra.image_style_suffix }}';
+        </script>
+        {% endif %}
 	</head>
 	<body class="is-preload">
 
@@ -60,6 +75,36 @@
 								{% else %}
 									<a href="{{item.url}}" class="image">
 										<img src="{{item.url}}" alt="" />
+                                        {% if item.exif %}
+                                            {% if item.exif.parsed %}
+                                                <span class="exif-wrapper">
+                                                    {% if item.exif.focal %}
+                                                    <span class="exif-item">
+                                                        <img class="exif-icon" src="http://s2.idinr.com/focus.png">
+                                                        <span class="exif-text">{{item.exif.focal}}</span>
+                                                    </span>
+                                                    {% endif %}
+                                                    {% if item.exif.iso %}
+                                                        <span class="exif-item">
+                                                            <img class="exif-icon" src="http://s2.idinr.com/iso.png">
+                                                            <span class="exif-text">{{item.exif.iso}}</span>
+                                                        </span>
+                                                    {% endif %}
+                                                    {% if item.exif.shutter %}
+                                                    <span class="exif-item">
+                                                        <img class="exif-icon" src="http://s2.idinr.com/shutter.png">
+                                                        <span class="exif-text">{{item.exif.shutter}}</span>
+                                                    </span>
+                                                    {% endif %}
+                                                    {% if item.exif.aperture %}
+                                                    <span class="exif-item">
+                                                        <img class="exif-icon" src="http://s2.idinr.com/timer.png">
+                                                        <span class="exif-text">{{item.exif.aperture}}sec.</span>
+                                                    </span>
+                                                    {% endif %}
+                                                </span>
+                                            {% endif %}
+                                        {% endif %}
 									</a>
 								{% endif %}
 								{% if item.title %}

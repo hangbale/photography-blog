@@ -44,6 +44,7 @@ impl Renderer {
     }
     pub fn render(&self, path: &str, data: &Website) {
         let mut ctx = Context::from_serialize(data).expect("Could not create context");
+        // ctx.insert("extra", &data.1);
         let r = self.instance.render("index.html", &mut ctx)
             .expect(format!("Could not render template: {}", path).as_str());
         

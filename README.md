@@ -6,6 +6,13 @@
 
 DEMO: http://i.idinr.com
 
+ [**中文说明**](https://github.com/hangbale/photography-blog/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)
+
+## Change Log
+### 2022-6-14
+- Show Image Exif Info
+
+
 ## Features
 
 - Fully Responsive
@@ -16,6 +23,7 @@ DEMO: http://i.idinr.com
 - Automated Image Fit
 - Easy Config With JSON
 - Faster
+- auto parse Exif data
 
 
 
@@ -67,9 +75,53 @@ DEMO: http://i.idinr.com
    
    ```
 
-4. A `public` directory will be created, use it as your server root;
+4. A `public` directory will be created, use it as your server root
 
+## Image and Exif
+There are two ways to store image: cdn or local.
+Only four Exif fields will be displayed:  
 
+- focal
+- iso
+- aperture
+- shutter
+
+### CDN (recommended)
+If you want show Exif of a image in cdn，you should the field：`extra` of its parent **collection node**.  
+
+A cdn url must start with http of https to distinguish from local image uri.
+
+```
+   "extra": {
+    "image_exif_query_suffix": "?exif",
+    "image_style_suffix": "$blog"
+  }
+```
+image_exif_query_suffix: to fetch url exif data from cdn api.
+image_style_suffix: if the cdn url has a image style suffix the replace it to get original url.
+
+**note**: I wrote this code because i use `qiniu(七牛云)`，I did not handle other cdn service because they are too many.
+
+### local
+- create a directory named by `image`
+- put all your iamges in
+- specify the url field with prefix `/image`，because this mean the root of website
+
+**A local image will be extracted Exif info automatically.**
+
+### Specify Exif manually
+```
+    {
+        "title": "title",
+        "url": "http://xx.com/ss.jpg",
+        "exif": {
+            "focal": "1",
+            "iso": "100",
+            "shutter": "1/1000",
+            "aperture": "1/1"
+        }
+    },
+```
 
 ## Development
 
@@ -90,5 +142,4 @@ Defined in ` src/config.rs`
 ### Template
 The default template is   `template/index.html` and be used by all the pages.
 Template Engine is Tera https://tera.netlify.app/docs/.
-
 

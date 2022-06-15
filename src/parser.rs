@@ -3,6 +3,7 @@ use std::path::PathBuf;
 use serde_json;
 use serde::{Deserialize, Serialize};
 use urlencoding::{decode};
+use crate::image::{ExifInfo};
 
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -15,12 +16,20 @@ pub struct Website {
   pub author: Option<String>,
   pub path: Option<String>,
   pub breadcrumbs: Option<Vec<Breadcrumb>>,
+  pub exif: Option<ExifInfo>,
+  pub extra: Option<Extra>,
 }
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Breadcrumb {
   pub title: String,
   pub path: String,
   pub current: bool
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Extra {
+    pub image_exif_query_suffix: String, // suported cdn: 七牛云
+    pub image_style_suffix: String // suported cdn: 七牛云
 }
 
 pub fn create_breadcrumbs(item_path: &str) -> Option<Vec<Breadcrumb>> {
