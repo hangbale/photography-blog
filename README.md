@@ -132,18 +132,19 @@ Other assets should be placed in a directory named `assets`
  
  **directory structure**
  `assets` and `index.html` are mandatory.
+
  - theme root
-  |- assets  
-  |- index.html
+   - assets  
+   - index.html
  
  **available variables in template**
  - all the fields in `config.json`
  - item.exif // the EXIF info of image
     - parsed true/false if local parse exif info successed
-    - focal // 焦距
-    - iso   // 感光度
-    - shutter //快门
-    - 光圈     // 光圈
+    - focal 
+    - iso 
+    - shutter
+    - aperture
 - item.category album/none is a image collection
 - breadcrumbs // array of breadcrumb
   - title // path title
