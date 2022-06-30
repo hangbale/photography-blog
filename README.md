@@ -11,11 +11,9 @@ DEMO: http://i.idinr.com
 ## Change Log
 ### 2022-6-14
 - Show Image Exif Info
+### 2022-6-30
+- explain how to develop a theme
 
-## screenshots
-
-![
-](https://github.com/hangbale/photography-blog/blob/6aa6f2a4b54de39294c583dd14fb455b8b966aae/screenshots/pc.png?raw=true)
 
 ## Features
 
@@ -126,6 +124,31 @@ image_style_suffix: if the cdn url has a image style suffix the replace it to ge
         }
     },
 ```
+ ## Theme
+Because all the pages use a same html template currently, so a theme can only have one html file named `index.html`. 
+Other assets should be placed in a directory named `assets`
+ ### development
+ The template engine is `Tera`
+ 
+ **directory structure**
+ `assets` and `index.html` are mandatory.
+ - theme root
+  |- assets  
+  |- index.html
+ 
+ **available variables in template**
+ - all the fields in `config.json`
+ - item.exif // the EXIF info of image
+    - parsed true/false if local parse exif info successed
+    - focal // 焦距
+    - iso   // 感光度
+    - shutter //快门
+    - 光圈     // 光圈
+- item.category album/none is a image collection
+- breadcrumbs // array of breadcrumb
+  - title // path title
+  - path // path url
+  - current true/false //is current path
 
 ## Development
 
