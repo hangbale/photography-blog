@@ -2,34 +2,41 @@ name: Rust
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
+    branches:
+      - master
 env:
   CARGO_TERM_COLOR: always
-
-jobs:
-  build-linux:
-
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - run: ls -la
-      - run: cargo build --release
-      
-  build-windows:
-    runs-on: windows-2019
-    steps:
-      - uses: actions/checkout@master
-      - run: cargo build --release
-      
-  build-mac:
-    runs-on: macos-11
-    steps:
-      - uses: actions/checkout@master
-      - run: ls -la
-      - run: cargo build --release
-      - with:
-          path: target/release/blog-cli
   
+jobs:
+  release:
+    name: build and release
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2019, macos-11, ubuntu-latest]
+
+    steps:
+      - name: Check out git repository
+        uses: actions/checkout@master
+
+      - name: Build
+        run: cargo build --release
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: ${{ matrix.os }}
+          path: target/release/
+
+      - name: release
+        uses: softprops/action-gh-release@v0.1.14
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: "target/release/blog-cli/**"
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
