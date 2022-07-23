@@ -13,19 +13,21 @@ jobs:
   build-linux:
 
     runs-on: ubuntu-latest
-
     steps:
+      - uses: actions/checkout@master
       - run: ls -la
       - run: cargo build --release
       
   build-windows:
     runs-on: windows-2019
     steps:
+      - uses: actions/checkout@master
       - run: cargo build --release
       
   build-mac:
     runs-on: macos-11
     steps:
+      - uses: actions/checkout@master
       - run: ls -la
       - run: cargo build --release
   
