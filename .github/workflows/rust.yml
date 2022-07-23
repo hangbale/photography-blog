@@ -29,28 +29,28 @@ jobs:
       
       - name: upload windows artifacts
         uses: actions/upload-artifact@v3.0.0
-        if: matrix.os == "windows-2019"
+        if: matrix.os == 'windows-2019'
         with:
           name: "Windows"
           path: target/release/blog-cli.exe
           
       - name: upload linux artifacts
         uses: actions/upload-artifact@v3.0.0
-        if: matrix.os == "ubuntu-latest"
+        if: matrix.os == 'ubuntu-latest'
         with:
           name: "Linux"
           path: target/release/blog-cli
 
       - name: upload macos artifacts
         uses: actions/upload-artifact@v3.0.0
-        if: matrix.os == "macos-11"
+        if: matrix.os == 'macos-11'
         with:
           name: "MacOS"
           path: target/release/blog-cli
 
       - name: release
         uses: softprops/action-gh-release@v0.1.14
-        if: matrix.os == "ubuntu-latest"
+        if: matrix.os == 'ubuntu-latest'
         with:
           files: "target/release/blog-cli"
         env:
@@ -58,7 +58,7 @@ jobs:
 
       - name: release
         uses: softprops/action-gh-release@v0.1.14
-        if: matrix.os == "macos-11"
+        if: matrix.os == 'macos-11'
         with:
           files: "target/release/blog-cli"
         env:
@@ -66,7 +66,7 @@ jobs:
           
       - name: release
         uses: softprops/action-gh-release@v0.1.14
-        if: matrix.os == "windows-2019"
+        if: matrix.os == 'windows-2019'
         with:
           files: "target/release/blog-cli.exe"
         env:
