@@ -30,4 +30,6 @@ jobs:
       - uses: actions/checkout@master
       - run: ls -la
       - run: cargo build --release
+      - with:
+          path: target/release/blog-cli
   
