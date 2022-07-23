@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Build
-      run: cargo build --release
+      run: ls && cargo build --release
       
   build-windows:
     runs-on: windows-2019
@@ -28,5 +28,5 @@ jobs:
     runs-on: macos-11
     steps:
     - name: Build
-      run: cargo build --release
+      run: ls && cargo build --release
   
