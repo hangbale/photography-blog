@@ -25,8 +25,17 @@ jobs:
         run: cargo build --release
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
-      
+          
+      - name: rename
+        if: matrix.os == 'windows-2019'
+        run: ren target/release/blog-cli.exe target/release/blog-cli-windows.exe
+      - name: rename
+        if: matrix.os == 'ubuntu-latest'
+        run: mv target/release/blog-cli target/release/blog-cli-linux
+      - name: rename
+        if: matrix.os == 'macos-11'
+        run: mv target/release/blog-cli target/release/blog-cli-macos
+        
       - name: upload windows artifacts
         uses: actions/upload-artifact@v3.0.0
         if: matrix.os == 'windows-2019'
