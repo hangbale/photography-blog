@@ -15,18 +15,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Build
-      run: ls && cargo build --release
+      - run: ls -la
+      - run: cargo build --release
       
   build-windows:
     runs-on: windows-2019
     steps:
-    - name: Build
-      run: cargo build --release
+      - run: cargo build --release
       
   build-mac:
     runs-on: macos-11
     steps:
-    - name: Build
-      run: ls && cargo build --release
+      - run: ls -la
+      - run: cargo build --release
   
