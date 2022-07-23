@@ -13,6 +13,8 @@ DEMO: http://i.idinr.com
 - Show Image Exif Info
 ### 2022-6-30
 - explain how to develop a theme
+### 2022-7-23
+- bug fix in windows
 
 
 ## Features
@@ -31,9 +33,9 @@ DEMO: http://i.idinr.com
 
 ## Usage
 
-1. Clone this repo.
+1. Download the executable file from release page, put it to your project directory.
 
-2. Create a file `config.json` in root directory.
+2. Create a file `config.json` in project directory.
 
    config example:
 
@@ -73,7 +75,7 @@ DEMO: http://i.idinr.com
 
    ```bash
    cd project_dir
-   ./blog-cli
+   ./blog-cli // for windows: excute blog-cli.exe
    
    ```
 
