@@ -5,4 +5,4 @@ pub const IMAGE_PATH: &str = "image";
 
 // for windows xcopy
 pub const WIN_PUBLIC_ASSET_PATH: &str = r"public\assets\";
-pub const WIN_ASSETS_PATH: &str = r"template/assets";
+pub const WIN_ASSETS_PATH: &str = r"template\assets";

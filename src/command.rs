@@ -35,7 +35,6 @@ pub fn copy_asset_files_with_shell() {
 
 pub fn try_copy_files() {
     let os = env::consts::OS;
-    println!("current os: {}", os);
     match os {
         "linux" | "macos" | "freebsd" | "openbsd" | "solaris" => copy_asset_files_with_shell(),
         "windows" => copy_files_with_cmd(),
