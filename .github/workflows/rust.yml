@@ -28,7 +28,7 @@ jobs:
           
       - name: rename
         if: matrix.os == 'windows-2019'
-        run: ren target/release/blog-cli.exe target/release/blog-cli-windows.exe
+        run: ren .\target\release\blog-cli.exe .\target\release\blog-cli-windows.exe
       - name: rename
         if: matrix.os == 'ubuntu-latest'
         run: mv target/release/blog-cli target/release/blog-cli-linux
