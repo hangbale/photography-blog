@@ -74,6 +74,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: matrix.os == 'windows-2019'
         with:
-          files: "blog-cli.exe"
+          files: "target/release/blog-cli.exe"
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
