@@ -14,7 +14,7 @@ DEMO: http://i.idinr.com
 ### 2022-6-30
 - explain how to develop a theme
 ### 2022-7-23
-- bug fix in windows
+- bug fix on windows
 
 
 ## Features
@@ -75,9 +75,10 @@ DEMO: http://i.idinr.com
 
    ```bash
    cd project_dir
-   ./blog-cli // for windows: excute blog-cli.exe
+   ./blog-cli
    
    ```
+for windows: excute blog-cli.exe
 
 4. A `public` directory will be created, use it as your server root
 
