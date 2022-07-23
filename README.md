@@ -72,7 +72,7 @@ DEMO: http://i.idinr.com
    - A single image must have **url** field.
 
 3. Excute generator
-
+you should add executable permission first.
    ```bash
    cd project_dir
    ./blog-cli
