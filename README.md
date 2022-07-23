@@ -73,13 +73,13 @@ DEMO: http://i.idinr.com
 
 3. Excute generator   
 
-you should add executable permission first.
+   you should add executable permission first.
    ```bash
    cd project_dir
    ./blog-cli
    
    ```
-for windows: excute blog-cli.exe
+   for windows: excute blog-cli.exe
 
 4. A `public` directory will be created, use it as your server root
 
