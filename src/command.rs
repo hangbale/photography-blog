@@ -1,7 +1,7 @@
 use std::process::Command;
 use std::path::Path;
 use std::env;
-use crate::config::{PUBLIC_PATH, ASSETS_PATH, IMAGE_PATH};
+use crate::config::{PUBLIC_PATH, ASSETS_PATH, IMAGE_PATH, WIN_ASSETS_PATH, WIN_PUBLIC_ASSET_PATH};
 
 pub fn if_path_exists(path: &str) -> bool {
     Path::new(path).exists()
@@ -18,11 +18,12 @@ pub fn copy_files_with_shell(source: &str, destination: &str) {
 // for windows
 pub fn copy_files_with_cmd() {
     let mut command = Command::new("XCOPY");
+
     command.arg("/E");
     command.arg("/Y");
-    command.arg(ASSETS_PATH).arg(PUBLIC_PATH);
+    command.arg(WIN_ASSETS_PATH).arg(WIN_PUBLIC_ASSET_PATH);
     command.status()
-        .expect(format!("Could not copy file from: {} to {}", ASSETS_PATH, PUBLIC_PATH).as_str());
+        .expect(format!("Could not copy file from: {} to {}", WIN_ASSETS_PATH, WIN_PUBLIC_ASSET_PATH).as_str());
 
 }
 pub fn copy_asset_files_with_shell() {
