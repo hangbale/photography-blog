@@ -49,24 +49,24 @@ jobs:
           path: target/release/blog-cli
 
       - name: release
-        uses: softprops/action-gh-release@v0.1.14
-        if: ${{ (matrix.os == 'ubuntu-latest') && (startsWith(github.ref, 'refs/tags/')) }}
+        uses: softprops/action-gh-release@v1
+        if: matrix.os == 'ubuntu-latest'
         with:
           files: "target/release/blog-cli"
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       - name: release
-        uses: softprops/action-gh-release@v0.1.14
-        if: ${{ (matrix.os == 'macos-11') && (startsWith(github.ref, 'refs/tags/')) }}
+        uses: softprops/action-gh-release@v1
+        if: matrix.os == 'macos-11'
         with:
           files: "target/release/blog-cli"
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           
       - name: release
-        uses: softprops/action-gh-release@v0.1.14
-        if: ${{ (matrix.os == 'windows-2019') && (startsWith(github.ref, 'refs/tags/')) }}
+        uses: softprops/action-gh-release@v1
+        if: matrix.os == 'windows-2019'
         with:
           files: "target/release/blog-cli.exe"
         env:
