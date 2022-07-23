@@ -41,27 +41,27 @@ jobs:
         if: matrix.os == 'windows-2019'
         with:
           name: "Windows"
-          path: target/release/blog-cli.exe
+          path: target/release/blog-cli-windows.exe
           
       - name: upload linux artifacts
         uses: actions/upload-artifact@v3.0.0
         if: matrix.os == 'ubuntu-latest'
         with:
           name: "Linux"
-          path: target/release/blog-cli
+          path: target/release/blog-cli-linux
 
       - name: upload macos artifacts
         uses: actions/upload-artifact@v3.0.0
         if: matrix.os == 'macos-11'
         with:
           name: "MacOS"
-          path: target/release/blog-cli
+          path: target/release/blog-cli-macos
 
       - name: release
         uses: softprops/action-gh-release@v1
         if: matrix.os == 'ubuntu-latest'
         with:
-          files: "target/release/blog-cli"
+          files: "target/release/blog-cli-linux"
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
@@ -69,7 +69,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: matrix.os == 'macos-11'
         with:
-          files: "target/release/blog-cli"
+          files: "target/release/blog-cli-macos"
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           
@@ -77,6 +77,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: matrix.os == 'windows-2019'
         with:
-          files: "target/release/blog-cli.exe"
+          files: "blog-cli-windows.exe"
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
