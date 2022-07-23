@@ -13,5 +13,5 @@ mod image;
 fn main() {
     let website = parser::parse();
     frame::create_path_from_config(website);
-    command::copy_asset_files();
+    command::try_copy_files();
 }
