@@ -71,7 +71,8 @@ DEMO: http://i.idinr.com
    - If a item is collection then  generate a page for it.
    - A single image must have **url** field.
 
-3. Excute generator
+3. Excute generator   
+
 you should add executable permission first.
    ```bash
    cd project_dir
