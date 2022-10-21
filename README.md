@@ -9,6 +9,11 @@ DEMO: http://i.idinr.com
 
  [**中文说明**](https://github.com/hangbale/photography-blog/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)
 
+## screenshots
+
+![](https://github.com/hangbale/photography-blog/blob/master/screenshots/pc.png?raw=true)   
+![](https://github.com/hangbale/photography-blog/blob/master/screenshots/mobile.png?raw=true)
+
 ## Change Log
 ### 2022-6-14
 - Show Image Exif Info
