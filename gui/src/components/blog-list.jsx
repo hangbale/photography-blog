@@ -1,6 +1,13 @@
 import { Table, Row, Col, Tooltip, Button } from '@nextui-org/react';
-
-export default function BlogList () {
+export default function BlogList (props) {
+    if (!props.list) {
+        return null
+    }
+    let rows = props.list.map((item, index) => {
+        item.key = index
+        return item;
+    })
+    console.log(rows)
     const columns = [
         {
             key: "name",
@@ -11,7 +18,11 @@ export default function BlogList () {
             label: "IP",
         },
         {
-            key: "status",
+            key: "domain",
+            label: "域名",
+        },
+        {
+            key: "lastUpdate",
             label: "最近发布",
         },
         {
@@ -19,32 +30,7 @@ export default function BlogList () {
             label: "操作",
         },
     ];
-    const rows = [
-        {
-            key: "1",
-            name: "Tony Reichert",
-            ip: "12.12.12.12",
-            status: "Active",
-        },
-        {
-            key: "2",
-            name: "Zoey Lang",
-            ip: "12.12.12.12",
-            status: "Paused",
-        },
-        {
-            key: "3",
-            name: "Jane Fisher",
-            ip: "12.12.12.12",
-            status: "Active",
-        },
-        {
-            key: "4",
-            name: "William Howard",
-            ip: "12.12.12.12",
-            status: "Vacation",
-        },
-    ];
+
     function renderCell (list, columnKey) {
         const cellValue = list[columnKey];
         switch (columnKey) {

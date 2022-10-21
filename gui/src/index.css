@@ -53,3 +53,13 @@ code {
 .main-bg {
     background: #fff !important;
 }
+.flex {
+    display: flex;
+    align-items: center;    
+}
+.mr-16 {
+    margin-right: 16px;
+}
+.page-title {
+    margin-bottom: 0;
+}
