@@ -1,4 +1,5 @@
 import { Table, Row, Col, Tooltip, Button } from '@nextui-org/react';
+
 export default function BlogList (props) {
     if (!props.list) {
         return null
@@ -92,7 +93,7 @@ export default function BlogList (props) {
                 height: "auto",
                 minWidth: "100%",
             }}
-            className="main-bg"
+            className="main-bg mt-16"
         >
             <Table.Header columns={columns}>
                 {(column) => (

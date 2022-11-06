@@ -22,12 +22,16 @@ code {
 .right-content {
     flex: 1;
     padding: 8px 0 0 0;
+    height: 100vh;
+    
 }
 .main-wrapper {
     background: #f1f3f5;
-    min-height: 100%;
     border-radius: 16px 0 0 0;
     padding: 36px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
 }
 /* left nav */
 .left-nav .nav-list {
@@ -60,6 +64,82 @@ code {
 .mr-16 {
     margin-right: 16px;
 }
+.mt-16 {
+    margin-top: 16px;
+}
+.mt-24 {
+    margin-top: 24px;
+}
+.pt-36 {
+    margin-top: 36px;
+}
 .page-title {
     margin-bottom: 0;
+}
+.img-entry {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    flex-direction: column;
+}
+.img-entry .img-entry-icon {
+    font-size: 100px;
+}
+.text-primary {
+    color: #0072F5;
+}
+.img-list-block {
+    margin-left: -12px;
+}
+.flex-right {
+    margin-right: 0;
+    margin-left: auto;
+}
+.page-pics {
+    height: 100%;
+    box-sizing: border-box;
+}
+.pic-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.pic-list-item {
+    width: 20%;
+    padding: 12px;
+}
+.exif-info {
+    display: flex;
+}
+.exif-info + .exif-info {
+    margin-top: 8px;
+}
+.exif-info-item {
+    font-size: 12px;
+    color: #666;
+    background-position: left center;
+    background-size: 12px;
+    background-repeat: no-repeat;
+    line-height: 1.2;
+}
+.exif-info-item.shutter {
+    background-image: url("img/shutter.png");
+    padding-left: 14px;
+}
+.exif-info-item.iso {
+    background-image: url("img/iso.png");
+    padding-left: 14px;
+}
+.exif-info-item.focal {
+    background-image: url("img/focal.png");
+    padding-left: 14px;
+}
+.exif-info-item.aperture {
+    background-image: url("img/aperture.png");
+    padding-left: 14px;
+}
+.exif-info-item + .exif-info-item {
+    margin-left: 8px;
 }

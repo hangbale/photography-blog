@@ -26,7 +26,7 @@ export default function PageFrame (props) {
                     }}
                     weight="bold"
                 >
-                    PicTank
+                    PicTruck
                 </Text>
                 <ul className="nav-list">
                     <li onClick={() => goto('/')}>

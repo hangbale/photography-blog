@@ -1,5 +1,7 @@
 import { BaseDirectory } from '@tauri-apps/api/path';
 import { readTextFile, writeTextFile, createDir, exists } from '@tauri-apps/api/fs';
+import { invoke } from '@tauri-apps/api'
+
 const mainConfig = 'config.json';
 export const PicLibPath = 'default_pic_lib'
 
