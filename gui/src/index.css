@@ -143,3 +143,6 @@ code {
 .exif-info-item + .exif-info-item {
     margin-left: 8px;
 }
+#nextui-modal > div {
+    z-index: 1000 !important;
+}

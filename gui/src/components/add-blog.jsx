@@ -5,7 +5,11 @@ import Swal from 'sweetalert2'
 
 export default function AddBlog (props) {
     let [nameState, setNameState] = useState('default')
-    let [values, setValues] = useState({})
+    let [values, setValues] = useState({
+        name: '',
+        ip: '',
+        domain: ''
+    })
     function onChange (key, v) {
         setValues({
             ...values,
@@ -17,21 +21,32 @@ export default function AddBlog (props) {
             setNameState('error')
             return
         }
-        console.log(values)
         addBlog(values).then(res => {
-            console.log(res)
-            Swal.fire('操作成功')
+            if (res && res.code === 0) {
+                close()
+                props.onSuccess()
+                Swal.fire('操作成功')
+            } else {
+                Swal.fire(res.data)
+            }
         })
     }
-    useEffect(() => {
-        console.log(props)
-    }, [props])
+    function close () {
+        setValues({
+            name: '',
+            ip: '',
+            domain: ''
+        })
+        setNameState('default')
+        props.onClose()
+    }
+
     return (
         <Modal
             closeButton
             aria-labelledby="modal-title"
             open={props.show}
-            onClose={props.onClose}
+            onClose={close}
         >
             <Container>
                 <h3>新增博客</h3>

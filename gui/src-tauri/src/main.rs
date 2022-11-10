@@ -8,6 +8,8 @@ mod blog;
 mod utils;
 mod img;
 mod state;
+mod common;
+
 fn main() {
     let app = tauri::Builder::default();
     app.manage(state::DB::init())

@@ -7,7 +7,7 @@ use rusqlite::{Connection, Result, Params,params, ParamsFromIter, params_from_it
                         name   TEXT NOT NULL,
                         ip     TEXT NOT NULL,
                         domain TEXT NOT NULL,
-                        data   BLOB
+                        last_update   INTEGER
                     )";
 
 

@@ -9,7 +9,10 @@ export default function Home() {
     let [showAdd, setShowAdd] = useState(false);
     function fetchList () {
         getBlogList().then(res => {
-            setList(res || [])
+            if (res && res.code === 0) {
+                setList(res.data || [])
+                setShowAdd(false)
+            }
         })
     }
     function onAdd () {
@@ -22,7 +25,7 @@ export default function Home() {
                 <Button size="sm" className="mr-16" color="secondary" onPress={onAdd}>新增</Button>
             </div>
             <BlogList list={list}/>
-            <AddBlog onClose={() => setShowAdd(false)} show={showAdd}/>
+            <AddBlog onClose={() => setShowAdd(false)} onSuccess={fetchList} show={showAdd}/>
         </div>
     )
 }
