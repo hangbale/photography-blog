@@ -12,3 +12,8 @@ export function addBlog (item) {
         item: item
     });
 }
+export function removeBlog (item) {
+    return invoke('remove_blog', {
+        itemKey: item
+    });
+}

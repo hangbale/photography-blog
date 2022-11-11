@@ -1,14 +1,12 @@
-import { Table, Row, Col, Tooltip, Button } from '@nextui-org/react';
+import { Table, Row, Col, Tooltip, Button, Popover } from '@nextui-org/react';
+import { removeBlog } from "service";
+import Swal from 'sweetalert2'
 
 export default function BlogList (props) {
     if (!props.list) {
         return null
     }
-    let rows = props.list.map((item, index) => {
-        item.key = index
-        return item;
-    })
-    console.log(rows)
+    let rows = props.list
     const columns = [
         {
             key: "name",
@@ -31,7 +29,14 @@ export default function BlogList (props) {
             label: "操作",
         },
     ];
-
+    function remove (item) {
+        removeBlog(item.key).then(res => {
+            Swal.fire(res.data)
+            if (res.code === 0) {
+                props.onRefresh()
+            }
+        })
+    }
     function renderCell (list, columnKey) {
         const cellValue = list[columnKey];
         switch (columnKey) {
@@ -47,38 +52,36 @@ export default function BlogList (props) {
                 return (
                     <Row justify="center" align="center">
                         <Col css={{ d: "flex" }}>
-                            <Tooltip content="Details">
-                                <Button
-                                    light
-                                    color="primary"
-                                    auto
-                                    icon={<i className="bi bi-eye-fill"></i>}
-                                />
-                            </Tooltip>
+                            <Button
+                                light
+                                color="primary"
+                                auto
+                                icon={<i className="bi bi-eye-fill"></i>}></Button>
                         </Col>
                         <Col css={{ d: "flex" }}>
-                            <Tooltip content="Edit user">
-                                <Button
-                                    light
-                                    color="primary"
-                                    auto
-                                    icon={<i className="bi bi-pencil-fill"></i>}
-                                />
-                            </Tooltip>
+                            <Button
+                                light
+                                color="primary"
+                                auto
+                                icon={<i className="bi bi-pencil-fill"></i>} />
                         </Col>
                         <Col css={{ d: "flex" }}>
-                            <Tooltip
-                                content="Delete user"
-                                color="error"
-                                onClick={() => console.log("Delete user")}
-                            >
-                                <Button
-                                    auto
-                                    color="error"
-                                    icon={<i className="bi bi-trash-fill"></i>}
-                                />
-                                
-                            </Tooltip>
+                            <Popover placement="top">
+                                <Popover.Trigger>
+                                    <Button
+                                        auto
+                                        color="error"
+                                        icon={<i className="bi bi-trash-fill"></i>} />
+                                </Popover.Trigger>
+                                <Popover.Content>
+                                    <Button
+                                        auto
+                                        color="error"
+                                        onClick={() => remove(list)}
+                                        icon={<i className="bi bi-trash-fill"></i>}>确认删除</Button>
+                                </Popover.Content>
+                            </Popover>
+                            
                         </Col>
                     </Row>
                 );

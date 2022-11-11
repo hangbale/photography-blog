@@ -24,7 +24,7 @@ export default function Home() {
             <div>
                 <Button size="sm" className="mr-16" color="secondary" onPress={onAdd}>新增</Button>
             </div>
-            <BlogList list={list}/>
+            <BlogList onRefresh={fetchList} list={list}/>
             <AddBlog onClose={() => setShowAdd(false)} onSuccess={fetchList} show={showAdd}/>
         </div>
     )

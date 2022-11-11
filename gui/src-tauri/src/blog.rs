@@ -8,9 +8,12 @@ use super::common::Respone;
 
 const SQL_LIST: &str = "SELECT * FROM blog";
 const SQL_INSERT: &str = "INSERT INTO blog (name, ip, domain) VALUES (?1, ?2, ?3)";
+const SQL_REMOVE: &str = "DELETE FROM blog WHERE ID = (?1)";
+
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Blog {
+    pub key: Option<i32>,
     pub name: String,
     pub ip: String,
     pub domain: String,
@@ -26,6 +29,7 @@ fn blog_list_sql(db: State<DB>) -> Result<Vec<Blog>, Box<dyn std::error::Error>>
             
             while let Some(row) = rows.next()? {
                 blogs.push(Blog {
+                    key: row.get("id")?,
                     name: row.get("name")?,
                     ip: row.get("ip")?,
                     domain: row.get("domain")?,
@@ -47,6 +51,18 @@ fn blog_add_sql(db: State<DB>, item: Blog) -> Result<String, Box<dyn std::error:
     }
     Err("操作失败".to_owned())?
 }
+
+fn blog_remove_sql(db: State<DB>, item_key: i32) -> Result<String, Box<dyn std::error::Error>> {
+    let dbt = db.get();
+    if let Some(dbr) = dbt {
+        if let Some(ref dbi) = *dbr {
+            let t = dbi.execute(SQL_REMOVE, [item_key]).map(|_| "操作成功".to_owned())?;
+            return Ok(t);
+        }
+    }
+    Err("操作失败".to_owned())?
+}
+
 #[tauri::command]
 pub fn list(db: State<DB>) -> Respone<Vec<Blog>> {
     let t = blog_list_sql(db);
@@ -56,5 +72,12 @@ pub fn list(db: State<DB>) -> Respone<Vec<Blog>> {
 #[tauri::command]
 pub fn add_blog(db: State<DB>, item: Blog) -> Respone<String> {
     let t = blog_add_sql(db, item);
+    return Respone::<String>::from(t);
+}
+
+#[tauri::command]
+pub fn remove_blog(db: State<DB>, item_key: i32) -> Respone<String> {
+    println!("{item_key}");
+    let t = blog_remove_sql(db, item_key);
     return Respone::<String>::from(t);
 }

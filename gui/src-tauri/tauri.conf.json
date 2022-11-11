@@ -7,7 +7,7 @@
     "distDir": "../build"
   },
   "package": {
-    "productName": "Picjet",
+    "productName": "PicTruck",
     "version": "0.1.0"
   },
   "tauri": {
@@ -48,7 +48,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.hangbale.picjet",
+      "identifier": "com.hangbale.pictruck",
       "longDescription": "",
       "macOS": {
         "entitlements": null,

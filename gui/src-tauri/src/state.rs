@@ -1,6 +1,6 @@
 use std::{sync::{Mutex, MutexGuard}};
-use tauri::State;
-use rusqlite::{Connection, Result, Params,params, ParamsFromIter, params_from_iter};
+use rusqlite::{Connection};
+use std::path::PathBuf;
 
  const SQL_INIT: &str = "CREATE TABLE blog (
                         id     INTEGER PRIMARY KEY,
@@ -17,12 +17,19 @@ pub struct DB {
 
 impl DB {
     pub fn init() -> Self {
-        let c = Connection::open_in_memory().ok();
         Self {
-            db: Mutex::new(c)
+            db: Mutex::new(None)
         }
     }
-    pub fn setup(&self) {
+    pub fn setup(&self, apppath: Option<PathBuf>) {
+        if let Some(mut appdir) = apppath {
+            appdir.push("main.db3");
+            let c = Connection::open(appdir).ok();
+            let d = self.db.lock();
+            if let Ok(mut db)  = d {
+                *db = c
+            }
+        }
         self.exec_noparam(SQL_INIT);
     }
     pub fn exec_noparam(&self, sql: &str) {
