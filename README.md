@@ -1,5 +1,5 @@
-# Personal Photography Blog Generator
-摄影类博客生成器
+# 摄影类博客生成工具
+
 
 > The theme was originally made by HTML5 UP [Multiverse | HTML5 UP](https://html5up.net/multiverse)
 
