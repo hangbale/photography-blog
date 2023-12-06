@@ -4,6 +4,7 @@ use std::fs::{File};
 use std::path::Path;
 use exif::{self, Tag, In, Exif, Rational};
 use std::default::Default;
+use crate::config::{IMAGE};
 // GPS Coord
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Coord {
@@ -70,7 +71,10 @@ pub fn is_online_image(path: &str) -> bool {
     !path.starts_with("http") || !path.starts_with("//")
 }
 pub fn is_local_image(path: &str) -> bool {
-    Path::new(path).exists()
+    println!("path: {}", path);
+    let r = Path::new(path).exists();
+    println!("r: {}", r);
+    r
 }
 pub fn get_exif_field(ex: &Exif, tag: Tag, ifd: In) -> Option<String> {
     let ret = ex.get_field(tag, ifd);
@@ -98,9 +102,7 @@ pub fn get_exif_from_image(image_path: &str) -> ExifInfo {
                 ret.iso = get_exif_field(&ef, Tag::PhotographicSensitivity, In::PRIMARY);
                 ret.focal = get_exif_field(&ef, Tag::FocalLengthIn35mmFilm, In::PRIMARY);
                 ret.date = get_exif_field(&ef, Tag::DateTimeDigitized, In::PRIMARY);
-                let coord = get_gps_coord(&ef);
-                println!("coord: {:?}", coord);
-                
+                ret.coord = get_gps_coord(&ef);
                 ret.parsed = true; // todo: check all fields
                 ret
             }
@@ -109,17 +111,35 @@ pub fn get_exif_from_image(image_path: &str) -> ExifInfo {
                 ret
             }
         }
-        
+
     } else {
         eprint!("Could not open file: {}", image_path);
         ret
     }
 }
 
-pub fn try_get_img_exif(url: &Vec<String>) -> Option<ExifInfo> {
+pub fn try_get_img_exif(url: &str) -> Option<ExifInfo> {
     if is_local_image(url) {
         Some(get_exif_from_image(url))
     } else {
         None
     }
+}
+pub fn parse_pics(pics: &Vec<String>) -> Vec<IMAGE> {
+    let mut ret: Vec<IMAGE> = vec![];
+    for pic in pics {
+        println!("pic: {}", pic);
+        let exif = try_get_img_exif(pic);
+        let img_name = Path::new(pic).file_name().unwrap();
+        let img_name = img_name.to_str().unwrap();
+        let mut img = IMAGE {
+            title: img_name.to_string(),
+            exif: None,
+        };
+        if let Some(exif) = exif {
+            img.exif = Some(exif);
+        }
+        ret.push(img);
+    }
+    ret
 }

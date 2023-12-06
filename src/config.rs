@@ -43,7 +43,7 @@ pub struct Website {
   pub title: String, // 必填
   pub description: Option<String>,
   pub children: Option<Vec<Website>>,
-  pub pics: Option<String>,
+  pub pics: Option<Vec<String>>,
   pub pics_parsed: Option<Vec<IMAGE>>,
   pub category: Option<WebsiteCategory>,
   pub author: Option<String>,

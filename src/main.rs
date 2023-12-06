@@ -7,6 +7,7 @@ mod parser;
 mod image;
 fn main() {
     let mut config = config::read_config();
+    println!("{:#?}", config);
     parser::parse(&mut config, "", None);
     println!("{:#?}", config);
 }
