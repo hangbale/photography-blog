@@ -40,17 +40,26 @@
 					<header id="header">
 						
                         <h1>
-                            {% if author %}
+                            <!-- {% if author %}
                             <a href="/"><strong>{{author}}</strong></a>
                             {% else %}
                             <a href="/"><strong><i class="fa fa-home"></i></strong></a>
-                            {% endif %}
+                            {% endif %} -->
                             {% if breadcrumbs %}
                                 {% for item in breadcrumbs %}
-                                    {% if item.current %}
-                                    <a href="javascript:;" class="breadcrumbs-current"><strong>/ {{item.title}}</strong></a>
+                                    {% if item.path == "/" %}
+                                        <a href="/"><strong><i class="fa fa-home"></i></strong></a>
+                                        {% if item.current %}
+                                            <a href="javascript:;" class="breadcrumbs-current"><strong> {{item.title}}</strong></a>
+                                        {% else %}
+                                            <a href="/"><strong> {{item.title}}</strong></a>
+                                        {% endif %}
                                     {% else %}
-                                    <a href="{{item.path}}"><strong>/ {{item.title}}</strong></a>
+                                        {% if item.current %}
+                                            <a href="javascript:;" class="breadcrumbs-current"><strong>/ {{item.title}}</strong></a>
+                                        {% else %}
+                                            <a href="{{item.path}}"><strong>/ {{item.title}}</strong></a>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
@@ -68,42 +77,40 @@
 						{% if children %}
 							{% for item in children %}
 							<article class="thumb">
-								{% if item.category == "album" %}
+								{% if item.category == "Album" %}
 									<a href="{{item.path}}" class="link">
-										<img src="{{item.url}}" alt="" />
+										<img src="{{item.cover}}" alt="" />
 									</a>
 								{% else %}
 									<a href="{{item.url}}" class="image">
 										<img src="{{item.url}}" alt="" />
-                                        {% if item.exif %}
-                                            {% if item.exif.parsed %}
-                                                <span class="exif-wrapper">
-                                                    {% if item.exif.focal %}
-                                                    <span class="exif-item">
-                                                        <img class="exif-icon" src="http://s2.idinr.com/focus.png">
-                                                        <span class="exif-text">{{item.exif.focal}}</span>
-                                                    </span>
-                                                    {% endif %}
-                                                    {% if item.exif.iso %}
-                                                        <span class="exif-item">
-                                                            <img class="exif-icon" src="http://s2.idinr.com/iso.png">
-                                                            <span class="exif-text">{{item.exif.iso}}</span>
-                                                        </span>
-                                                    {% endif %}
-                                                    {% if item.exif.shutter %}
-                                                    <span class="exif-item">
-                                                        <img class="exif-icon" src="http://s2.idinr.com/shutter.png">
-                                                        <span class="exif-text">{{item.exif.shutter}}</span>
-                                                    </span>
-                                                    {% endif %}
-                                                    {% if item.exif.aperture %}
-                                                    <span class="exif-item">
-                                                        <img class="exif-icon" src="http://s2.idinr.com/timer.png">
-                                                        <span class="exif-text">{{item.exif.aperture}}sec.</span>
-                                                    </span>
-                                                    {% endif %}
+                                        {% if item.parsed_pic %}
+                                            <span class="exif-wrapper">
+                                                {% if item.parsed_pic.focal %}
+                                                <span class="exif-item">
+                                                    <img class="exif-icon" src="http://s2.idinr.com/focus.png">
+                                                    <span class="exif-text">{{item.exif.focal}}</span>
                                                 </span>
-                                            {% endif %}
+                                                {% endif %}
+                                                {% if item.parsed_pic.iso %}
+                                                    <span class="exif-item">
+                                                        <img class="exif-icon" src="http://s2.idinr.com/iso.png">
+                                                        <span class="exif-text">{{item.exif.iso}}</span>
+                                                    </span>
+                                                {% endif %}
+                                                {% if item.parsed_pic.shutter %}
+                                                <span class="exif-item">
+                                                    <img class="exif-icon" src="http://s2.idinr.com/shutter.png">
+                                                    <span class="exif-text">{{item.exif.shutter}}</span>
+                                                </span>
+                                                {% endif %}
+                                                {% if item.parsed_pic.aperture %}
+                                                <span class="exif-item">
+                                                    <img class="exif-icon" src="http://s2.idinr.com/timer.png">
+                                                    <span class="exif-text">{{item.exif.aperture}}sec.</span>
+                                                </span>
+                                                {% endif %}
+                                            </span>
                                         {% endif %}
 									</a>
 								{% endif %}

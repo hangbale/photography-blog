@@ -67,9 +67,9 @@ fn get_gps_coord(ef: &Exif) -> Option<Coord> {
     }
 }
 
-pub fn is_online_image(path: &str) -> bool {
-    !path.starts_with("http") || !path.starts_with("//")
-}
+// pub fn is_online_image(path: &str) -> bool {
+//     !path.starts_with("http") || !path.starts_with("//")
+// }
 pub fn is_local_image(path: &str) -> bool {
     println!("path: {}", path);
     let r = Path::new(path).exists();
@@ -125,21 +125,17 @@ pub fn try_get_img_exif(url: &str) -> Option<ExifInfo> {
         None
     }
 }
-pub fn parse_pics(pics: &Vec<String>) -> Vec<IMAGE> {
-    let mut ret: Vec<IMAGE> = vec![];
-    for pic in pics {
-        println!("pic: {}", pic);
-        let exif = try_get_img_exif(pic);
-        let img_name = Path::new(pic).file_name().unwrap();
-        let img_name = img_name.to_str().unwrap();
-        let mut img = IMAGE {
-            title: img_name.to_string(),
-            exif: None,
-        };
-        if let Some(exif) = exif {
-            img.exif = Some(exif);
-        }
-        ret.push(img);
+pub fn parse_pic(pic_url: &str) -> IMAGE {
+    let exif = try_get_img_exif(pic_url);
+    let img_name = Path::new(pic_url).file_name().unwrap();
+    let img_name = img_name.to_str().unwrap();
+    let mut img = IMAGE {
+        title: img_name.to_string(),
+        exif: None,
+        url: pic_url.to_string()
+    };
+    if let Some(exif) = exif {
+        img.exif = Some(exif);
     }
-    ret
+    img
 }

@@ -4,10 +4,12 @@ use std::fs::File;
 use std::path::Path;
 use colored::*;
 
-static TEMPLATE_FILE_PATH: &str = "template/*.html";
-static PUBLIC_PATH: &str = "public";
-static ASSETS_PATH: &str = "template/assets";
-static IMAGE_PATH: &str = "image";
+pub static TEMPLATE_FILE_PATH: &str = "template/*.html";
+pub static PUBLIC_PATH: &str = "public/";
+pub static ASSETS_PATH: &str = "template/assets";
+pub static IMAGE_PATH: &str = "image";
+pub static DEFAULT_ABOUT_TEXT: &str = "ABOUT ME";
+pub static DEFAULT_ABOUT_URL: &str = "http://idinr.com";
 static CONFIG_FILE_PATH: &str = "config.yml";
 
 // for windows xcopy
@@ -29,7 +31,8 @@ pub struct Breadcrumb {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct IMAGE {
   pub title: String,
-  pub exif: Option<ExifInfo>
+  pub exif: Option<ExifInfo>,
+  pub url: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -39,18 +42,34 @@ pub struct Extra {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+pub struct About {
+    pub text: String,
+    pub url: String
+}
+impl Default for About {
+    fn default() -> Self {
+        About {
+            text: DEFAULT_ABOUT_TEXT.to_string(),
+            url: DEFAULT_ABOUT_URL.to_string()
+        }
+    }
+}
+
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Website {
   pub title: String, // 必填
   pub description: Option<String>,
   pub children: Option<Vec<Website>>,
-  pub pics: Option<Vec<String>>,
-  pub pics_parsed: Option<Vec<IMAGE>>,
+  pub parsed_pic: Option<IMAGE>,
   pub category: Option<WebsiteCategory>,
-  pub author: Option<String>,
+//   pub author: Option<String>,
   pub path: Option<String>, // 页面路径 根据title而来
   pub breadcrumbs: Option<Vec<Breadcrumb>>,
   pub exif: Option<ExifInfo>,
   pub extra: Option<Extra>,
+  pub cover: Option<String>,
+  pub url: Option<String>,
+  pub about: Option<About>
 }
 
 pub fn read_config() -> Website {
@@ -69,13 +88,5 @@ pub fn read_config() -> Website {
                 std::process::exit(0);
             }
         }
-    }
-}
-
-pub fn get_category(url: &str) -> WebsiteCategory {
-    if url.ends_with(".html") {
-        WebsiteCategory::Photo
-    } else {
-        WebsiteCategory::Album
     }
 }
